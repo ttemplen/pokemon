@@ -198,22 +198,18 @@ So far you have the app with the static data but you don't have a database yet t
 
 1. Make sure to install the libraries locally in the `pokemon-app`,
 
-	```
-	npm install sequelize --save
-	npm install pg --save
+	```js
+	npm install sequelize sequelize-cli pg
 	```
 2. After that run `sequelize init` in `pokemon-app` to create the desired folders.
 3. Add required configuration in `config/config.json`
 
-	```
+	```js
 	{
 	  "development": {
-	    "username": "postgres",
-	    "password": "postgres",
 	    "database": "pokemon_dev",
 	    "host": "127.0.0.1",
 	    "dialect": "postgres",
-	    "operatorsAliases": false
 	  }
 	}
 	```
@@ -224,7 +220,7 @@ So far you have the app with the static data but you don't have a database yet t
 5. Generate `Pokemon` model using Sequelize CLI `model:generate` command and create all the fields you need with it.
 6. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values.
 
-	```
+	```js
 	createdAt: {
       	defaultValue: new Date(),
         allowNull: false,
@@ -260,7 +256,7 @@ So far you have the app with the static data but you don't have a database yet t
 5. Generate `Player` model using Sequelize CLI `model:generate` command and create all the fields you need with it.
 6. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values. Also, make `username` unique.
 
-	```
+	```js
 	username: {       type: Sequelize.STRING,       unique: true    },
 	createdAt: {
       	defaultValue: new Date(),
@@ -302,7 +298,7 @@ Let's create a new model `Team` first. The only field `Team` will have is `name`
 5. Generate `Team ` model using Sequelize CLI `model:generate` command and create `name` field which will be a string.
 6. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values. Also, make `name` not null.
 
-	```
+	```js
 	name: {       type: Sequelize.STRING,       allowNull: false    },
 	createdAt: {
       	defaultValue: new Date(),
@@ -319,7 +315,7 @@ Let's create a new model `Team` first. The only field `Team` will have is `name`
 8. Generate database seed file for `Team`, `sequelize seed:generate --name demo-team`
 9. Fill the created empty seeders file by adding `bulkInsert` on objects.
 10. Seed the database table by running `sequelize db:seed --seed <xxxxxxxxx-demo-team.js>`
-11. Confirm is psql,
+11. Confirm in psql,
 
 	```
 	psql -U postgres
