@@ -234,10 +234,10 @@ So far you have the app with the static data but you don't have a database yet t
         type: Sequelize.DATE
     }
 	```
-1. Run the migrations `sequelize db:migrate`
+1. Run the migrations `npx sequelize db:migrate`
 1. Generate database seed file for `Pokemon`, `npx sequelize seed:generate --name demo-pokemon`
 1. Fill the created empty seeders file by adding `bulkInsert` on objects.
-1. Seed the database table by running `sequelize db:seed:all`
+1. Seed the database table by running `npx sequelize db:seed:all`
 1. Confirm in psql,
 
 	```bash
@@ -274,7 +274,7 @@ So far you have the app with the static data but you don't have a database yet t
         type: Sequelize.DATE
     }
 	```
-1. Run the migrations `sequelize db:migrate`
+1. Run the migrations `npx sequelize db:migrate`
 1. Generate database seed file for `Player`, `npx sequelize seed:generate --name demo-player`
 1. Fill the created empty seeders file by adding `bulkInsert` on objects.
 1. Seed the database table by running `npx sequelize db:seed --seed <xxxxxxxxx-demo-player.js>`
