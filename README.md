@@ -8,6 +8,8 @@ Make a Pokemon app that displays data inside server-side rendered views.
 
 Create a full CRUD app on Pokemon.
 
+- [Sequelize 6 Refactored Solution - Check the branches for the specific day's solution](https://git.generalassemb.ly/marcwright-rem/pokemon-express-sequelize6)
+
 
 ## Day 1
 
@@ -201,7 +203,7 @@ So far you have the app with the static data but you don't have a database yet t
 	```js
 	npm install sequelize sequelize-cli pg
 	```
-2. After that run `sequelize init` in `pokemon-app` to create the desired folders.
+2. After that run `npx sequelize init` in `pokemon-app` to create the desired folders.
 3. Add required configuration in `config/config.json`
 
 	```js
@@ -217,8 +219,8 @@ So far you have the app with the static data but you don't have a database yet t
 
 ### Create Pokemon Model
 
-5. Generate `Pokemon` model using Sequelize CLI `model:generate` command and create all the fields you need with it.
-6. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values.
+1. Generate `Pokemon` model using Sequelize CLI `model:generate` command and create all the fields you need with it.
+1. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values.
 
 	```js
 	createdAt: {
@@ -232,32 +234,35 @@ So far you have the app with the static data but you don't have a database yet t
         type: Sequelize.DATE
     }
 	```
-7. Run the migrations `sequelize db:migrate`
-8. Generate database seed file for `Pokemon`, `sequelize seed:generate --name demo-pokemon`
-9. Fill the created empty seeders file by adding `bulkInsert` on objects.
-10. Seed the database table by running `sequelize db:seed:all`
-11. Confirm is psql,
+1. Run the migrations `sequelize db:migrate`
+1. Generate database seed file for `Pokemon`, `npx sequelize seed:generate --name demo-pokemon`
+1. Fill the created empty seeders file by adding `bulkInsert` on objects.
+1. Seed the database table by running `sequelize db:seed:all`
+1. Confirm in psql,
 
-	```
+	```bash
 	psql -U postgres
 	\c pokemon_dev
 	\dt
 	SELECT * FROM "Pokemons";
 	```
-12. Import `Pokemon` model in the `controllers/pokemon.js`
+1. Import `Pokemon` model in the `controllers/pokemonController.js`
 
-	```
+	```js
 	const Pokemon = require('../models').Pokemon;
 	```
-13. Now, update all the controller functions one by one with the `Pokemon` model. Be sure to test the app after each API is updated. You may have to update your views wherever needed with `pokemon.id` instead of using index.
+1. Now, update all the controller functions one by one with the `Pokemon` model. Be sure to test the app after each API is updated. You may have to update your views wherever needed with `pokemon.id` instead of using index.
 
 ### Create Player Model
 
-5. Generate `Player` model using Sequelize CLI `model:generate` command and create all the fields you need with it.
-6. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values. Also, make `username` unique.
+1. Generate `Player` model using Sequelize CLI `model:generate` command and create all the fields you need with it.
+1. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values. Also, make `username` unique.
 
 	```js
-	username: {       type: Sequelize.STRING,       unique: true    },
+	username: {
+       type: Sequelize.STRING,
+       unique: true
+    },
 	createdAt: {
       	defaultValue: new Date(),
         allowNull: false,
@@ -269,24 +274,24 @@ So far you have the app with the static data but you don't have a database yet t
         type: Sequelize.DATE
     }
 	```
-7. Run the migrations `sequelize db:migrate`
-8. Generate database seed file for `Player`, `sequelize seed:generate --name demo-player`
-9. Fill the created empty seeders file by adding `bulkInsert` on objects.
-10. Seed the database table by running `sequelize db:seed --seed <xxxxxxxxx-demo-player.js>`
-11. Confirm is psql,
+1. Run the migrations `sequelize db:migrate`
+1. Generate database seed file for `Player`, `npx sequelize seed:generate --name demo-player`
+1. Fill the created empty seeders file by adding `bulkInsert` on objects.
+1. Seed the database table by running `npx sequelize db:seed --seed <xxxxxxxxx-demo-player.js>`
+1. Confirm is psql,
 
-	```
+	```bash
 	psql -U postgres
 	\c pokemon_dev
 	\dt
 	SELECT * FROM "Players";
 	```
-12. Import `Player` model in the `controllers/player.js`
+1. Import `Player` model in the `controllers/playerController.js`
 
-	```
+	```js
 	const Player = require('../models').Player;
 	```
-13. Now, update all the controller functions one by one with the `Player` model. Be sure to test the app after each API is updated. You may have to update your views wherever needed with `player.id` instead of using the index.
+1. Now, update all the controller functions one by one with the `Player` model. Be sure to test the app after each API is updated. You may have to update your views wherever needed with `player.id` instead of using the index.
 
 ## Day 6
 Today you will work on building associations between different models. So far you have a `Pokemon` and `Player` model.
@@ -299,7 +304,10 @@ Let's create a new model `Team` first. The only field `Team` will have is `name`
 6. Update the generated migrations file such that both `createdAt` and `updatedAt` fields have default values. Also, make `name` not null.
 
 	```js
-	name: {       type: Sequelize.STRING,       allowNull: false    },
+	name: {
+       type: Sequelize.STRING,
+       allowNull: false
+    },
 	createdAt: {
       	defaultValue: new Date(),
         allowNull: false,
@@ -317,7 +325,7 @@ Let's create a new model `Team` first. The only field `Team` will have is `name`
 10. Seed the database table by running `sequelize db:seed --seed <xxxxxxxxx-demo-team.js>`
 11. Confirm in psql,
 
-	```
+	```bash
 	psql -U postgres
 	\c pokemon_dev
 	\dt
@@ -330,7 +338,7 @@ Now that `Team` model has been created we can go ahead and add `teamId` column t
 1. Create a migration file to add `teamId` to the `Players` table.
 
 	```bash
-		sequelize migration:generate --name add-teamId-to-players
+		npx sequelize migration:generate --name add-teamId-to-players
 	```
 2. Inside the newly created migration file, add code to add the column to the table.
 	
@@ -344,7 +352,7 @@ Now that `Team` model has been created we can go ahead and add `teamId` column t
 	  },
 	``` 
 	
-3. Run `sequelize db:migrate` to run the new migration file.
+3. Run `npx sequelize db:migrate` to run the new migration file.
 4. In the `models/player.js`, make sure to add the new column so that our app knows about it.
 	
 	
@@ -358,12 +366,41 @@ Now that `Team` model has been created we can go ahead and add `teamId` column t
  	```
 5. Reseed the `seeders/<TIMESTAMP>-demo-player.js` with a some team ids. Make sure the teamIds you use exist in the `Teams` table.
 
-```
-	'use strict';	module.exports = {  up: (queryInterface, Sequelize) => {    return queryInterface.bulkInsert('Players', [      {        name:'Tony Stark',        username: 'ironman',        password: 'prettyawesome',        teamId: 1      },      {        name:'Clark Kent',        username: 'superman',        password: `canfly`,        teamId: 2      },      {        name:'Bruce Wayne',        username: 'batman',        password: 'hasgadgets',        teamId: 3      }    ])  },  down: (queryInterface, Sequelize) => {    	return queryInterface.bulkDelete('Players', null, {});  }};
+	```js
+	'use strict';
+
+	module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert('Players', [
+      {
+        name:'Tony Stark',
+        username: 'ironman',
+        password: 'prettyawesome',
+        teamId: 1
+      },
+      {
+        name:'Clark Kent',
+        username: 'superman',
+        password: `canfly`,
+        teamId: 2
+      },
+      {
+        name:'Bruce Wayne',
+        username: 'batman',
+        password: 'hasgadgets',
+        teamId: 3
+      }
+    ])
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    	await queryInterface.bulkDelete('Players', null, {});
+  }
+};
 ```
 	
-6. Once the above changes our made, undo player seeded date `sequelize db:seed:undo --seed 20200608030632-demo-player.js`
-7. After this, run `sequelize db:seed --seed xxxxxxxxx-demo-player.js` to reseed the `Players` data.
+6. Once the above changes our made, undo player seeded date `npx sequelize db:seed:undo --seed 20200608030632-demo-player.js`
+7. After this, run `npx sequelize db:seed --seed xxxxxxxxx-demo-player.js` to reseed the `Players` data.
 
 
 ### hasMany Association
@@ -374,13 +411,17 @@ That means, **Team hasMany Players** and each **Player belongsTo one Team**.
 
 1. In the `models/player.js` file, add the association for an `Player.hasMany(models.Team)`.
 	
-	```
-	Player.associate = function(models) {    	belongsTo(models.Team, { foreignKey: 'teamId' })  	};
+	```js
+	Player.associate = function(models) {
+    	belongsTo(models.Team, { foreignKey: 'teamId' })
+  	};
 	```
 2. In the `models/team.js` file, add the association for an `Team.hasMany(models.Player)`.
 
-	```
-	Team.associate = function(models) {    	Team.hasMany(models.Player, { foreignKey: 'teamId' })  	};
+	```js
+	Team.associate = function(models) {
+    	Team.hasMany(models.Player, { foreignKey: 'teamId' })
+  	};
 	```
 	
 ### Update Player Controller & View
@@ -396,26 +437,72 @@ That means, **Team hasMany Players** and each **Player belongsTo one Team**.
 
 Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by multiple players. That means `Player` **has many-to-many relationship** with `Pokemon`.
 
-1. Generate model for the join table, `sequelize model:create --name PlayerPokemon --attributes playerId:integer,pokemonId:integer`
+1. Generate model for the join table, `npx sequelize model:create --name PlayerPokemon --attributes playerId:integer,pokemonId:integer`
 2. Update the migration file
 	
 	```
-	'use strict';module.exports = {  up: (queryInterface, Sequelize) => {    return queryInterface.createTable('PlayerPokemons', {      id: {        allowNull: false,        autoIncrement: true,        primaryKey: true,        type: Sequelize.INTEGER      },      playerId: {        type: Sequelize.INTEGER,        allowNull: false      },      pokemonId: {        type: Sequelize.INTEGER,        allowNull: false      },      createdAt: {        allowNull: false,        defaultValue: new Date(),        type: Sequelize.DATE      },      updatedAt: {        allowNull: false,        defaultValue: new Date(),        type: Sequelize.DATE      }    });  },  down: (queryInterface, Sequelize) => {    return queryInterface.dropTable('PlayerPokemons');  }};
+	'use strict';
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('PlayerPokemons', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      playerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      pokemonId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      createdAt: {
+        allowNull: false,
+        defaultValue: new Date(),
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        defaultValue: new Date(),
+        type: Sequelize.DATE
+      }
+    });
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('PlayerPokemons');
+  }
+};
 	```
-3. Run the migration `sequelize db:migrate`
+3. Run the migration `npx sequelize db:migrate`
 
 ### belongsToMany Association
 
 Update `Pokemon` model
 
-```
-Pokemon.associate = function(models) {    Pokemon.belongsToMany(models.Player, {      through: 'PlayerPokemon',      foreignKey: 'pokemonId',      otherKey: 'playerId'    });};
+```js
+Pokemon.associate = function(models) {
+    Pokemon.belongsToMany(models.Player, {
+      through: 'PlayerPokemon',
+      foreignKey: 'pokemonId',
+      otherKey: 'playerId'
+    });
+};
 ```
 
 Update `Player` model
 
-```
-Player.associate = function(models) {    Player.belongsTo(models.Team, { foreignKey: 'teamId' })    Player.belongsToMany(models.Pokemon, {      through: 'PlayerPokemon',      foreignKey: 'playerId',      otherKey: 'pokemonId'    });};
+```js
+Player.associate = function(models) {
+    Player.belongsTo(models.Team, { foreignKey: 'teamId' })
+    Player.belongsToMany(models.Pokemon, {
+      through: 'PlayerPokemon',
+      foreignKey: 'playerId',
+      otherKey: 'pokemonId'
+    });
+};
 ```	
 
 
