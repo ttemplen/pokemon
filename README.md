@@ -294,7 +294,19 @@ So far you have the app with the static data but you don't have a database yet t
 1. Now, update all the controller functions one by one with the `Player` model. Be sure to test the app after each API is updated. You may have to update your views wherever needed with `player.id` instead of using the index.
 
 ## Day 6
-Today you will work on building associations between different models. So far you have a `Pokemon` and `Player` model. You'll create a `Team` model so that a team has many players and a player belongs to a team.
+
+Today you will work on building associations between different models. So far you have a `Pokemon` and `Player` model. 
+
+In the Fruit App model files, you defined associations where:
+
+- `User.hasMany(models.Fruit, { foreignKey: "userId" })`
+- `Fruit.belongsTo(models.User, { foreignKey: "userId" })`
+
+For Pokemon Express, you'll define:
+
+- Player has many Pokemon
+- Pokemon belongs to Player
+
 
 ### Create Team Model
 
