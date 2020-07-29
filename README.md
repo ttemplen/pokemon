@@ -450,28 +450,28 @@ Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by mu
 	  up: async (queryInterface, Sequelize) => {
 	    await queryInterface.createTable('PlayerPokemons', {
 	      id: {
-		allowNull: false,
-		autoIncrement: true,
-		primaryKey: true,
-		type: Sequelize.INTEGER
+				allowNull: false,
+				autoIncrement: true,
+				primaryKey: true,
+				type: Sequelize.INTEGER
 	      },
 	      playerId: {
-		type: Sequelize.INTEGER,
-		allowNull: false
+				type: Sequelize.INTEGER,
+				allowNull: false
 	      },
 	      pokemonId: {
-		type: Sequelize.INTEGER,
-		allowNull: false
+				type: Sequelize.INTEGER,
+				allowNull: false
 	      },
 	      createdAt: {
-		allowNull: false,
-		defaultValue: new Date(),
-		type: Sequelize.DATE
+				allowNull: false,
+				defaultValue: new Date(),
+				type: Sequelize.DATE
 	      },
 	      updatedAt: {
-		allowNull: false,
-		defaultValue: new Date(),
-		type: Sequelize.DATE
+				allowNull: false,
+				defaultValue: new Date(),
+				type: Sequelize.DATE
 	      }
 	    });
 	  },
