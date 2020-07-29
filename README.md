@@ -444,7 +444,7 @@ Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by mu
 1. Generate model for the join table, `npx sequelize model:create --name PlayerPokemon --attributes playerId:integer,pokemonId:integer`
 2. Update the migration file
 	
-	```
+	```js
 	'use strict';
 	module.exports = {
 	  up: async (queryInterface, Sequelize) => {
@@ -487,26 +487,26 @@ Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by mu
 Update `Pokemon` model
 
 	```js
-	static associate(models) {
-	    Pokemon.belongsToMany(models.Player, {
-	      through: 'PlayerPokemon',
-	      foreignKey: 'pokemonId',
-	      otherKey: 'playerId'
-	    });
-	};
+		static associate(models) {
+		    Pokemon.belongsToMany(models.Player, {
+		      through: 'PlayerPokemon',
+		      foreignKey: 'pokemonId',
+		      otherKey: 'playerId'
+		    });
+		};
 	```
 
 Update `Player` model
 
 	```js
-	static associate(models) {
-	    Player.belongsTo(models.Team, { foreignKey: 'teamId' })
-	    Player.belongsToMany(models.Pokemon, {
-	      through: 'PlayerPokemon',
-	      foreignKey: 'playerId',
-	      otherKey: 'pokemonId'
-	    });
-	};
+		static associate(models) {
+		    Player.belongsTo(models.Team, { foreignKey: 'teamId' })
+		    Player.belongsToMany(models.Pokemon, {
+		      through: 'PlayerPokemon',
+		      foreignKey: 'playerId',
+		      otherKey: 'pokemonId'
+		    });
+		};
 	```	
 
 
