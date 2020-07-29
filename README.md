@@ -372,34 +372,34 @@ Now that `Team` model has been created we can go ahead and add `teamId` column t
 	'use strict';
 
 	module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Players', [
-      {
-        name:'Tony Stark',
-        username: 'ironman',
-        password: 'prettyawesome',
-        teamId: 1
-      },
-      {
-        name:'Clark Kent',
-        username: 'superman',
-        password: `canfly`,
-        teamId: 2
-      },
-      {
-        name:'Bruce Wayne',
-        username: 'batman',
-        password: 'hasgadgets',
-        teamId: 3
-      }
-    ])
-  },
+	  up: async (queryInterface, Sequelize) => {
+	    await queryInterface.bulkInsert('Players', [
+	      {
+		name:'Tony Stark',
+		username: 'ironman',
+		password: 'prettyawesome',
+		teamId: 1
+	      },
+	      {
+		name:'Clark Kent',
+		username: 'superman',
+		password: `canfly`,
+		teamId: 2
+	      },
+	      {
+		name:'Bruce Wayne',
+		username: 'batman',
+		password: 'hasgadgets',
+		teamId: 3
+	      }
+	    ])
+	  },
 
-  down: async (queryInterface, Sequelize) => {
-    	await queryInterface.bulkDelete('Players', null, {});
-  }
-};
-```
+	  down: async (queryInterface, Sequelize) => {
+		await queryInterface.bulkDelete('Players', null, {});
+	  }
+	};
+	```
 	
 6. Once the above changes our made, the easiest thing for us to do is drop our tables, re-migrate and re-seed. This will ensure that the teamIds will match the players in the database. You can try this:
 
