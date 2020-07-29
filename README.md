@@ -484,29 +484,29 @@ Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by mu
 
 ### belongsToMany Association
 
-Update `Pokemon` model
+1. Update `Pokemon` model
 
 	```js
-		static associate(models) {
-		    Pokemon.belongsToMany(models.Player, {
-		      through: 'PlayerPokemon',
-		      foreignKey: 'pokemonId',
-		      otherKey: 'playerId'
-		    });
-		};
+	static associate(models) {
+	    Pokemon.belongsToMany(models.Player, {
+	      through: 'PlayerPokemon',
+	      foreignKey: 'pokemonId',
+	      otherKey: 'playerId'
+	    });
+	};
 	```
 
-Update `Player` model
+1. Update `Player` model
 
 	```js
-		static associate(models) {
-		    Player.belongsTo(models.Team, { foreignKey: 'teamId' })
-		    Player.belongsToMany(models.Pokemon, {
-		      through: 'PlayerPokemon',
-		      foreignKey: 'playerId',
-		      otherKey: 'pokemonId'
-		    });
-		};
+	static associate(models) {
+	    Player.belongsTo(models.Team, { foreignKey: 'teamId' })
+	    Player.belongsToMany(models.Pokemon, {
+	      through: 'PlayerPokemon',
+	      foreignKey: 'playerId',
+	      otherKey: 'pokemonId'
+	    });
+	};
 	```	
 
 
