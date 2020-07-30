@@ -521,7 +521,84 @@ Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by mu
 	};
 	```	
 
-### View the Pokemon that belongs to a Player
+### View the Pokemons that belong to a Player
+
+1.  Change the Show route in `playerController.js`.
+
+	```js
+	router.get("/profile/:id", (req, res) => {
+	  PlayerModel.findByPk(req.params.id, {
+	    include: [{ model: TeamModel }, { model: PokemonModel }],
+	  }).then((singlePlayer) => {
+	    TeamModel.findAll().then((allTeams) => {
+	      console.log(singlePlayer);
+	      res.render("player/profile.ejs", {
+		player: singlePlayer,
+		teams: allTeams,
+	      });
+	    });
+	  });
+	});
+	```
+
+1. `views/player/profile.ejs`
+
+	```js
+	<!DOCTYPE html>
+	<html>
+	  <head>
+	    <meta charset="utf-8" />
+	    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+	  </head>
+
+	  <body>
+	    <h1>Welcome <%=player.name%></h1>
+	    <h3>I belong to this team: <%= player.Team.name %></h3>
+	    <form action="/player/profile/<%=player.id%>?_method=PUT" method="POST">
+	      Name:
+	      <input type="text" name="name" value="<%=player.name%>" /><br />
+	      <br />
+	      Username:
+	      <input type="text" name="username" value="<%=player.username%>" />
+	      <br />
+	      <br />
+	      Password:
+	      <input type="text" name="password" value="<%=player.password%>" />
+	      <br />
+	      <br />
+	      Team:
+	      <select name="teamId">
+		<% for ( let i = 0; i < teams.length; i++ ) { let selected = ( i == 0 )
+		? "selected" : ""; %>
+		<option value="<%=teams[i].id%>" selected><%=teams[i].name%> </option>
+		<% } %>
+	      </select>
+
+	      <br />
+	      <br />
+	      <input type="submit" value="Edit Profile" />
+	    </form>
+	    <br />
+	    <form action="/player/<%= player.id%>?_method=DELETE" method="POST">
+	      <input type="submit" value="Delete Player" />
+	    </form>
+
+	    <br /><br />
+	    <a href="/pokemon">View All Pokemon</a>
+
+	    <h3>Pokemon added by you:</h3>
+	    <% for (let i = 0; i < player.Pokemons.length; i++){ %>
+	    <li>
+	      <%=player.Pokemons[i].name%></a>
+	    </li>
+	    <br />
+	    <% } %>
+
+	    <br /><br />
+	  </body>
+	</html>
+	```
+1. 
 
 ![](https://i.imgur.com/WJbRHAs.png)
 
