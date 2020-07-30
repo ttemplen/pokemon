@@ -521,6 +521,10 @@ Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by mu
 	};
 	```	
 
+### View the Pokemon that belongs to a Player
+
+![](https://i.imgur.com/WJbRHAs.png)
+
 
 <!--## Day 5
 
