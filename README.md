@@ -112,9 +112,8 @@ const pokemon = [
 
 
 ### Link your `index.ejs` to your `show.ejs`
- - inside your `index.ejs`,
- - for each pokemon, add an `<a>` tag that will have an `href` that goes to the route `/pokemon/x`, where x is the array position of the `pokemon` in the data array. This should be set dynamically with ejs
- - when you click the link you should go to your show route and the index number corresponding to the pokemon's array position should be displayed
+ - Inside your `index.ejs`, for each pokemon, add an `<a>` tag that will have an `href` that goes to the route `/pokemon/x`, where x is the array position of the `pokemon` in the data array. This should be set dynamically with ejs.
+ - When you click the link you should go to your show route and the index number corresponding to the pokemon's array position should be displayed.
 
 <hr>
    &#x1F534; The commit message should read: <br>
