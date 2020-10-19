@@ -137,7 +137,7 @@ Today you will add controller and router to the existing pokemon app to make it 
 ### Create Controller
 
 - Create `controllers` folder to the app
-- Render `index.js` and add `pokemon.js` in it
+- Render `index.ejs` and add `pokemon.js` in it
 - Import and export the necessary files, folders and/or libraries
 
 ### Create Router
