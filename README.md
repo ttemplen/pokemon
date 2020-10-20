@@ -161,7 +161,7 @@ These are few required functionality that must be implemented for a user.
 - A player can also delete itself
 
 
-## Weekend
+## Day 4.5
 
 Before starting with this, make sure that your app meets all the above requirements. It performs all the functionalities that you been asked to do so far.
 
