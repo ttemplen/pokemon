@@ -202,7 +202,7 @@ So far you have the app with the static data but you don't have a database yet t
 	npm install sequelize sequelize-cli pg
 	```
 2. After that run `npx sequelize init` in `pokemon-app` to create the desired folders.
-3. Add required configuration in `config/config.json`
+3. Add required configuration in `config/config.json` (don't forget to add your username/password). 
 
 	```js
 	{
