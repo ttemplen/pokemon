@@ -213,7 +213,7 @@ So far you have the app with the static data but you don't have a database yet t
 	  }
 	}
 	```
-4. Make sure to move any file other than `index.js` out of the `models` folder. The only file present in `models` folder should be `index.js`. Update the import paths of the files moved out of `index.js` in `controllers` folder.
+4. Make sure to move any file other than `index.js` out of the `models` folder. The only file present in `models` folder should be `index.js`. Update the import paths of the files moved out of the `models` folder in the `controllers` folder.
 
 ### Create Pokemon Model
 
