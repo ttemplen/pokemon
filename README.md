@@ -8,9 +8,6 @@ Make a Pokemon app that displays data inside server-side rendered views.
 
 Create a full CRUD app on Pokemon.
 
-- [Sequelize 6 Refactored Solution - Check the branches for the specific day's solution](https://git.generalassemb.ly/marcwright-rem/pokemon-express-sequelize6)
-
-
 ## Day 1
 
 ### Set up your server
@@ -614,8 +611,7 @@ Each `Player` can catch multiple pokemons and each `Pokemon` can be caught by mu
 
 <!--## Day 5
 
-
-## Hungry for more?
+## Hungry for more? teste
 
 1. Style your application with flexbox, or [Bootstrap!](https://getbootstrap.com/docs/4.1/getting-started/introduction/), a CSS library created by Twitter to make using the [960px grid system](https://960.gs/demo.html) a little easier. Or there's a substantially more lightweight 960px-grid-system-based answer to Bootstrap called [Skeleton](http://getskeleton.com/). You could also jazz up your app by adding some hand-rolled flourishes with CSS animations, and/or some sweet client-side jQuery and/or ....??? u pick???.....!
 
