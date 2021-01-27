@@ -1,5 +1,16 @@
 const express = require('express');
 const app = express();
+
+//Middleware comes before routes.
+app.use((req, res, next) => {
+    console.log('I run for all routes');
+    next();
+});
+
+app.use(express.urlencoded({ extended: true }))
+//capture new pokey data and load it into our model/pokey array
+//Middleware ends
+
 const pokemon = [
     {
       name: "Bulbasaur",
@@ -30,14 +41,28 @@ const pokemon = [
       img: "http://img.pokemondb.net/artwork/wartortle.jpg"
     }
   ];
+
+  app.get('/pokemon', (req, res) => {
+    res.render('index.ejs', {
+        pokemons: pokemon
+    });
+}) 
+
 app.get('/pokemon', (req, res) => {
     res.send(pokemon);
 });
+
+
+
 app.get('/pokemon/:index', (req, res) => {
     res.send(pokemon[req.params.index]);
 });
+
+
+
+
+
 app.listen(3000, ()=>{
     console.log("I am listening");
 });
 
-//Three
