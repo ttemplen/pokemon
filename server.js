@@ -48,6 +48,12 @@ const pokemon = [
     });
 }) 
 
+app.get('/pokemon/:index', (req, res) => {
+    res.render('show.ejs', {
+        pokemon: pokemon[req.params.index]
+    });
+})
+
 app.get('/pokemon', (req, res) => {
     res.send(pokemon);
 });
