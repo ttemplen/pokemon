@@ -30,4 +30,4 @@ const pokemon = [
     }
   ];
 
-module.exports = router;
+  module.exports=pokemon;

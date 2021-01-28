@@ -1,8 +1,8 @@
-onst express = require('express');
+const express = require('express');
 const router = express.Router();
 
 //Add Pokemon model
-const pokeman = require('../server.js');
+const pokemon = require("../model/pokey.js");
 
 
 router.get('/', (req, res) => {

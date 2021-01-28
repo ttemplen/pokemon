@@ -8,13 +8,13 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use.apply(express.static('public'));
+//app.use.apply(express.static('public'));
 app.use(express.urlencoded({ extended: true }))
 //capture new pokey data and load it into our model/pokey array
 
 app.use(methodOverride('_method'));
 
-app.use("/pokey", require("./controllers/pokemon"));
+app.use("/pokemon", require("./controllers/pokemon"));
 //Middleware ends
 
 // const pokemon = [
