@@ -8,9 +8,9 @@
     </head>
     <body>
 
-        <h1>Edit Fruit Page</h1>
+        <h1>Edit Pokemon Page</h1>
         <!--  ADD action attribute to form tag-->
-        <form action="/pokemon/<%=index%>?_method=PUT" method="POST">
+        <form action="/pokemon/<%= pokemon.id %>?_method=PUT" method="POST">
 		<!--  NOTE: the form is pre-populated with values for the server-->
 		Name: <input type="text" name="name" value="<%=pokemon.name%>"/><br/>
 		

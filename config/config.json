@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "tt92729",
+    "password": "skippy",
+    "database": "pokemon_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+  
+}

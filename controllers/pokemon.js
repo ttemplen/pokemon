@@ -2,75 +2,73 @@ const express = require('express');
 const router = express.Router();
 
 //Add Pokemon model
-const pokemon = require("../model/pokey.js");
+const Pokemon = require('../models').Pokemon;
 
 
-router.get('/', (req, res) => {
-    res.render('index.ejs', {
-        pokemons: pokemon
+router.get("/", (req, res) => {
+    Pokemon.findAll().then((pokemons) => {
+      res.render("index.ejs", {
+        pokemons: pokemons,
+      });
     });
-}) 
+  });
 //Delete
-router.delete('/:index', (req, res) => {
-	pokemon.splice(req.params.index, 1); //remove the item from the array
-	res.redirect('/pokemon');  //redirect back to index route
-});
+router.delete("/:id", (req, res) => {
+    Pokemon.destroy({ where: { id: req.params.id } }).then(() => {
+      res.redirect("/pokemon");
+    });
+  });
 //New- renders new.ejs html file
 router.get('/new',(req,res)=>{
 res.render('new.ejs')
 
 })
 //Post
-router.post('/', (req, res)=>{
-    // if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is 
-    //     ///set to 'on, turn to boolean true'
-    //     req.body.readyToEat = true; //do some data correction
-    // } else { //if not checked, req.body.readyToEat is undefined
-    //     req.body.readyToEat = false; //do some data correction
-    // }
-    pokemon.push(req.body);
-    
-    res.redirect('/pokemon');
-});
-//GET post
-router.get('/:index/edit', (req, res) =>{
-	res.render('edit.ejs', //render views/edit.ejs
-		{ //pass in an object that contains
-			pokemon: pokemon[req.params.index], //the  object
-			index: req.params.index //... and its index in the array
-		}
-	);
-});
+router.post("/", (req, res) => {  
+    Pokemon.create(req.body).then((newPokemon) => {
+      res.redirect("/pokemon");
+    });
+  });
+
+
+//Edit 
+router.get("/:id/edit", function (req, res) {
+    Pokemon.findByPk(req.params.id).then((pokemon) => {
+      res.render("edit.ejs", {
+        pokemon: pokemon,
+      });
+    });
+  });
+
 
 //PUT route for EDIT
-router.put('/:index', (req, res) => { //:index is the index of our fruits array that we want to change
-    //if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
-      //  req.body.readyToEat = true;
-    //} else { //if not checked, req.body.readyToEat is undefined
-     //   req.body.readyToEat = false;
-  //  }
-    pokemon[req.params.index] = req.body; //in our pokemon array, 
-    //find the index that is specified in the url (:index). 
-    // Set that element to the value of req.body (the input data)
-	res.redirect('/pokemon'); //redirect to the index page
-});
-
-
-router.get('/:index', (req, res) => {
-    res.render('show.ejs', {
-        pokemon: pokemon[req.params.index]
+router.put("/:id", (req, res) => {
+    Pokemon.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+    }).then((pokemon) => {
+      res.redirect("/pokemon");
     });
-})
+  });
 
-router.get('/', (req, res) => {
-    res.send(pokemon);
-});
+
+  router.get("/:id", (req, res) => {
+    Pokemon.findByPk(req.params.id).then((pokemon) => {
+      res.render("show.ejs", {
+        pokemon: pokemon,
+      });
+    });
+  });
+
+// router.get('/', (req, res) => {
+//     res.send(pokemon);
+// });
 
   
 
-router.get('/:index', (req, res) => {
-    res.send(pokemon[req.params.index]);
-});
+// router.get('/:index', (req, res) => {
+//     res.send(pokemon[req.params.index]);
+// });
 
 
 
