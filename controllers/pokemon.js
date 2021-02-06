@@ -5,6 +5,7 @@ const router = express.Router();
 const Pokemon = require('../models').Pokemon;
 
 
+
 router.get("/", (req, res) => {
     Pokemon.findAll().then((pokemons) => {
       res.render("index.ejs", {

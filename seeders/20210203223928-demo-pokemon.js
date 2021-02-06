@@ -53,6 +53,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('Pokemons', null, {});
     /**
      * Add commands to revert seed here.
      *

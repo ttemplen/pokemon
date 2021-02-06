@@ -3,6 +3,10 @@ const router = express.Router();
 
 //const Player = require('../models').Player;
 const User = require('../models').User;
+const Team = require('../models').Team;
+const Pokemon = require('../models').Pokemon;
+
+
 
 
 //const User = require('../models').User;
@@ -48,16 +52,37 @@ router.post('/profile', (req, res)=>{
  });
 });
 //seq
- router.get("/profile/:id", (req, res) => {
-    User.findByPk(req.params.id) .then((thisUser) =>{
-    res.render("users/profile.ejs", {
-        userInfo: thisUser, 
-			index: req.params.id    
-    })
-    
-    
+router.get("/profile/:id", (req, res) => {
+    User.findByPk(req.params.id, {
+      include:[{ model: Team }, { model: Pokemon }],
+    }).then((singlePlayer) => {
+      Team.findAll().then((allTeams) => {
+        console.log(singlePlayer);
+        res.render("users/profile.ejs", {
+      player: singlePlayer,
+      teams: allTeams,
+        });
+      });
     });
-})
+  });
+
+
+
+
+// router.get("/profile/:id", (req, res) => {
+//     User.findByPk(req.params.id).then((thisUser) => {  
+//         Team.findAll().then((allTeams) => {
+//             console.log("list of teams" + allTeams);
+//             res.render("users/profile.ejs", {
+//                 userInfo: thisUser,
+//                 index: req.params.id,
+//                 teams: allTeams,
+//             })
+//         })
+
+
+//     });
+// })
 
 
 router.put("/profile/:id", (req, res) => {
