@@ -51,6 +51,7 @@ router.post('/profile', (req, res)=>{
         
  });
 });
+
 //seq
 router.get("/profile/:id", (req, res) => {
     User.findByPk(req.params.id, {

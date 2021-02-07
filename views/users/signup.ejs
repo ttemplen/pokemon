@@ -12,11 +12,20 @@
     <form action="/users/profile" method="Post">
            Name: <input type="text"name= "name"><br/>
            Username: <input type="text"name="username"><br/>
+           Team:
+           <select name="teamId">
+         <% for ( let i = 0; i < teams.length; i++ ) { let selected = ( i == 0 )
+         ? "selected" : ""; %>
+         <option value="<%=teams[i].id%>" selected><%= teams[i].name%> </option>
+         <% } %>
+           </select>
+
            Password: <input type="text"name="password" ><br/>
             <input type = "submit" value = "Sign up">
-
+           
 
     </form>
+    
 
     </body>
 </html>
